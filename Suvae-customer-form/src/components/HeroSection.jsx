@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
+import axios from 'axios';
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
@@ -10,16 +11,32 @@ import MaskedInput from "react-text-mask";
 
 export default function HeroSection() {
   const [message, setMessage] = useState("");
-
+  const [orderId, setOrderId] = useState("");
+  const [orderError, setOrderError] = useState(false);
+  let navigate = useNavigate();
   const handleChange = (event) => {
     const result = event.target.value.replace(/[^a-z]/gi, "");
 
     setMessage(result);
   };
-  let navigate = useNavigate();
-  const onClaimButtonClick = () => {
+  const customInstance = axios.create({
+    baseURL: "http://localhost:5000",
+  });
+  const onClaimButtonClick = async() => {
+    let response;
+    try {
+      response = await axios.post(`http://localhost:5000/checkorder`, {
+        order: orderId
+      });
+    } catch (error) {
+      console.log("[ERROR][GROUPS][CREATE]: ", error.message);
+      setOrderError(true);
+      return;
+    }
     let path = `/rating`;
+    setOrderError(false);
     navigate(path);
+    
   };
 
   return (
@@ -172,6 +189,8 @@ export default function HeroSection() {
                           /\d/,
                           /\d/,
                         ]}
+                        value={orderId}
+                        onChange={(event) => setOrderId(event.target.value)}
                       />
                     </Box>
                     <Button
@@ -190,34 +209,36 @@ export default function HeroSection() {
                     >
                       Claim!
                     </Button>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <img
-                        src={`${help1}`}
-                        height="20px"
-                        alt="logo2"
-                        style={{ marginRight: "10px" }}
-                      />
-                      <Typography
+                    {orderError && (
+                      <Box
                         sx={{
-                          color: "#FF5D29",
-                          fontSize: {
-                            xs: "14px",
-                            sm: "14px",
-                            md: "16px",
-                            lg: "16px",
-                            xl: "16px",
-                          },
+                          display: "flex",
+                          justifyContent: "center",
+                          marginTop: "20px",
                         }}
                       >
-                        Invalid Order Number
-                      </Typography>
-                    </Box>
+                        <img
+                          src={`${help1}`}
+                          height="20px"
+                          alt="logo2"
+                          style={{ marginRight: "10px" }}
+                        />
+                        <Typography
+                          sx={{
+                            color: "#FF5D29",
+                            fontSize: {
+                              xs: "14px",
+                              sm: "14px",
+                              md: "16px",
+                              lg: "16px",
+                              xl: "16px",
+                            },
+                          }}
+                        >
+                          Invalid Order Number
+                        </Typography>
+                      </Box>
+                    )}
                     <Box sx={{ display: "flex", marginTop: "20px" }}>
                       <img
                         src={`${help}`}
