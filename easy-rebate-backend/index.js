@@ -31,12 +31,17 @@ const db = getFirestore(firebaseConn);
 app.post("/checkorder", async(req, res) => {
     console.log("[checking order] : " + req.body.order);
     res.setHeader('Content-Type', 'application/json');
-    const docRef = doc(db, "Amazon Order ID's", req.body.order);
-    const orderDoc = await getDoc(docRef);
-    if (orderDoc.exists()) {
-        res.sendStatus(200);
-    } else {
-        return res.status(400).send({ message: "No such order" });
+    try {
+        const docRef = doc(db, "Amazon Order ID's", req.body.order);
+        const orderDoc = await getDoc(docRef);
+        if (orderDoc.exists()) {
+            res.sendStatus(200);
+        } else {
+            return res.status(400).send({ message: "No such order" });
+        }
+    }
+    catch (e) {
+        return res.status(400).send({ message: e.message });
     }
 });
 

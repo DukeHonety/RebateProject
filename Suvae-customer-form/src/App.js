@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { Provider } from 'react-redux';
 import Home from "./pages/Home";
 import Rating from "./pages/Rating";
 import Comments from "./pages/Comments";
@@ -13,28 +14,31 @@ import SuggestionLocation from "./pages/SuggestionLocation";
 import OfferUnavailable from "./pages/OfferUnavailable";
 import AlreadyUsedOrderNumber from "./pages/AlreadyUsedOrderNumber";
 import SystemUpdate from "./pages/SystemUpdate";
+import { store } from './app/store';
 
 const App = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/rating" element={<Rating />} />
-        <Route path="/comments" element={<Comments />} />
-        <Route path="/reward" element={<Reward />} />
-        <Route path="/number" element={<RewardOnNumber />} />
-        <Route path="/email" element={<RewardOnEmail />} />
-        <Route path="/finish" element={<Finish />} />
-        <Route path="/stand_by" element={<StandBy />} />
-        <Route path="/suggestion" element={<Suggestion />} />
-        <Route path="/suggestion_link" element={<SuggestionLocation />} />
-        <Route path="/offer_unavailable" element={<OfferUnavailable />} />
-        <Route
-          path="/already_used_order_number"
-          element={<AlreadyUsedOrderNumber />}
-        />
-        <Route path="/system_update" element={<SystemUpdate />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/comments" element={<Comments />} />
+          <Route path="/reward" element={<Reward />} />
+          <Route path="/number" element={<RewardOnNumber />} />
+          <Route path="/email" element={<RewardOnEmail />} />
+          <Route path="/finish" element={<Finish />} />
+          <Route path="/stand_by" element={<StandBy />} />
+          <Route path="/suggestion" element={<Suggestion />} />
+          <Route path="/suggestion_link" element={<SuggestionLocation />} />
+          <Route path="/offer_unavailable" element={<OfferUnavailable />} />
+          <Route
+            path="/already_used_order_number"
+            element={<AlreadyUsedOrderNumber />}
+          />
+          <Route path="/system_update" element={<SystemUpdate />} />
+        </Routes>
+      </Provider>
     </>
   );
 };

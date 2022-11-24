@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Box, Typography, Button } from "@mui/material";
 import axios from 'axios';
 import heroImage from "../assets/images/heroImage.png";
@@ -6,22 +8,21 @@ import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
 import help from "../assets/images/help.png";
 import help1 from "../assets/images/help1.svg";
-import { useNavigate } from "react-router-dom";
 import MaskedInput from "react-text-mask";
+import { setUserName } from "../app/appSlice";
 
 export default function HeroSection() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [orderId, setOrderId] = useState("");
   const [orderError, setOrderError] = useState(false);
-  let navigate = useNavigate();
+
   const handleChange = (event) => {
     const result = event.target.value.replace(/[^a-z]/gi, "");
-
     setMessage(result);
   };
-  const customInstance = axios.create({
-    baseURL: "http://localhost:5000",
-  });
   const onClaimButtonClick = async() => {
     let response;
     try {
@@ -33,6 +34,8 @@ export default function HeroSection() {
       setOrderError(true);
       return;
     }
+    dispatch(setUserName(message));
+    dispatch(setUserName(orderId));
     let path = `/rating`;
     setOrderError(false);
     navigate(path);

@@ -1,15 +1,20 @@
-import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import progress2 from "../assets/images/progress2.png";
 import { useNavigate } from "react-router-dom";
+import { setComment } from "../app/appSlice";
 
 export default function CommentsSection() {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
+  const [comment, setIComment] = useState("");
   const onNextButtonClick = () => {
+    dispatch(setComment(comment));
     let path = `/reward`;
     navigate(path);
   };
@@ -101,6 +106,8 @@ export default function CommentsSection() {
                           border: "1px solid lightgray",
                           height:"60px",
                         }}
+                        value={comment}
+                        onChange={(event) => setIComment(event.target.value)}
                       />
                     </Box>
 

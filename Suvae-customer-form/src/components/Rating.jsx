@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
@@ -7,12 +8,15 @@ import StarOffImg from "../assets/images/star_off.png";
 import StarOnImg from "../assets/images/star_on.png";
 import { useNavigate } from "react-router-dom";
 import progress1 from "../assets/images/progress1.png";
+import { setEnjoyLvl } from "../app/appSlice";
 
 export default function RatingSection() {
-  const [currentLevel, SetLevel] = useState(0);
+  const dispatch = useDispatch();
+  const [currentLevel, SetLevel] = useState(5);
   const starAry = [0, 1, 2, 3, 4];
   let navigate = useNavigate();
   const onNextButtonClick = () => {
+    dispatch(setEnjoyLvl(currentLevel));
     if(currentLevel===3 || currentLevel===2 || currentLevel===1){
       let path = `/suggestion`;
     navigate(path);
@@ -117,8 +121,8 @@ export default function RatingSection() {
                           <div
                             className="cursor-pointer"
                             onClick={() => SetLevel(level + 1)}
-                            onMouseEnter={()=>SetLevel(level+1)}
-                            onMouseLeave={()=>SetLevel("")}
+                            // onMouseEnter={()=>SetLevel(level+1)}
+                            // onMouseLeave={()=>SetLevel("")}
                           >
                             {level < currentLevel && (
                               <img src={StarOnImg} className="h-85 w-85" alt="starOn" />
