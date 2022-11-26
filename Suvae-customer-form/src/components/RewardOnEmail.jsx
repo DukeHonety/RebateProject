@@ -1,14 +1,21 @@
-import React from "react";
 import { Box, Typography, Button, TextField } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
 import progress6 from "../assets/images/progress6.png";
 import { useNavigate } from "react-router-dom";
+import { setLinkEmail } from "../app/appSlice";
 
 export default function RewardOnEmailSection() {
+
+  const dispatch = useDispatch();
   let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+ 
   const onNextButtonClick = () => {
+    dispatch(setLinkEmail(email));
     let path = `/finish`;
     navigate(path);
   };
@@ -88,7 +95,7 @@ export default function RewardOnEmailSection() {
                     </Typography>
                   </Box>
                   <Box sx={{ marginTop: "30px" }}>
-                  <TextField
+                    <TextField
                       id="outlined-basic"
                       type="email"
                       variant="outlined"
@@ -98,6 +105,8 @@ export default function RewardOnEmailSection() {
                         margin: "auto",
                         backgroundColor: "white",
                       }}
+                      value={email}
+                      onChange = {(event) => setEmail(event.target.value)}
                     />
 
                     <Button

@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 const app = express();
 
 const { initializeApp } = require('firebase/app');
-const { doc, getDoc } = require("firebase/firestore");
+const { doc, getDoc, addDoc, setDoc } = require("firebase/firestore");
 const { getFirestore, collection, getDocs, getDocFromCache } = require ('firebase/firestore');
 
 const port = parseInt(process.env.PORT || 5000);
@@ -45,6 +45,18 @@ app.post("/checkorder", async(req, res) => {
     }
 });
 
+app.post("/storeform", async(req, res) => {
+    console.log('[received a submission] : ');
+    const userInput = req.body.input;
+    // const submissionCol = collection(db, "submissions");
+    try {
+      // const docRef = await addDoc(submissionCol, userInput);
+      await setDoc(doc(db, "submissions", userInput.order_id), userInput);
+    }
+    catch(e) {
+      console.log(e);
+    }
+});
 const server = app.listen(port, async () => {
     console.log(`Server running on port ${port}`);
     try {

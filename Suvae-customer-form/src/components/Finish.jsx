@@ -1,19 +1,32 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
 import { useNavigate } from "react-router-dom";
+import { baseServerUrl } from "../core/constant/base";
 
 export default function FinishSection() {
   let navigate = useNavigate();
+  const userInput = useSelector(state => state.app);
   const onLinkButtonClick = () => {
     let path = `/reward`;
     navigate(path);
   };
-  const onFinishButtonClick = () => {
-    let path = `/stand_by`;
-    navigate(path);
+  const onFinishButtonClick = async () => {
+    let response;
+    try {
+      response = await axios.post(`${baseServerUrl}/storeform`, {
+        input: userInput
+      });
+    } catch (error) {
+      console.log("[ERROR][GROUPS][CREATE]: ", error.message);
+      return;
+    }
+    // let path = `/stand_by`;
+    // navigate(path);
   };
   return (
     <>

@@ -9,14 +9,15 @@ import lightBg from "../assets/images/lightBg.png";
 import help from "../assets/images/help.png";
 import help1 from "../assets/images/help1.svg";
 import MaskedInput from "react-text-mask";
-import { setUserName } from "../app/appSlice";
+import { setOrderId, setUserName } from "../app/appSlice";
+import { baseServerUrl } from "../core/constant/base";
 
 export default function HeroSection() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-  const [orderId, setOrderId] = useState("");
+  const [order, setOrder] = useState("");
   const [orderError, setOrderError] = useState(false);
 
   const handleChange = (event) => {
@@ -26,8 +27,8 @@ export default function HeroSection() {
   const onClaimButtonClick = async() => {
     let response;
     try {
-      response = await axios.post(`http://localhost:5000/checkorder`, {
-        order: orderId
+      response = await axios.post(`${baseServerUrl}/checkorder`, {
+        order: order
       });
     } catch (error) {
       console.log("[ERROR][GROUPS][CREATE]: ", error.message);
@@ -35,7 +36,7 @@ export default function HeroSection() {
       return;
     }
     dispatch(setUserName(message));
-    dispatch(setUserName(orderId));
+    dispatch(setOrderId(order));
     let path = `/rating`;
     setOrderError(false);
     navigate(path);
@@ -192,8 +193,8 @@ export default function HeroSection() {
                           /\d/,
                           /\d/,
                         ]}
-                        value={orderId}
-                        onChange={(event) => setOrderId(event.target.value)}
+                        value={order}
+                        onChange={(event) => setOrder(event.target.value)}
                       />
                     </Box>
                     <Button

@@ -1,10 +1,13 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
+import React from "react";
+import { useSelector } from "react-redux";
 import heroImage from "../assets/images/heroImage.png";
 import formBg from "../assets/images/formBg.png";
 import lightBg from "../assets/images/lightBg.png";
 
 export default function StandBySection() {
+  const userInput = useSelector(state => state.app);
+  console.log(userInput);
   return (
     <>
       <Box>
