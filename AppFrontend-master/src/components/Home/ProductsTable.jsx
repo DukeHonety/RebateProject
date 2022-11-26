@@ -598,7 +598,6 @@ export default function ProductsTable() {
                   </Box>
                 </TableCell>
               </TableRow>
-
             </TableBody>
           </Table>
           <Box sx={{ width: "97%", margin: "auto", paddingTop: "20px" }}>

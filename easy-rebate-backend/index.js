@@ -57,6 +57,23 @@ app.post("/storeform", async(req, res) => {
       console.log(e);
     }
 });
+
+app.get("/submissions", async(req, res) => {
+  console.log("[loading submissions]");
+  try {
+    const docRef = await getDocs(collection(db, "submissions"));
+    let result = [];
+    docRef.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      result.push(doc.data());
+    });
+    res.json({data:result});
+    // return result;
+  }
+  catch (e) {
+      return res.status(400).send({ message: e.message });
+  }
+});
 const server = app.listen(port, async () => {
     console.log(`Server running on port ${port}`);
     try {
