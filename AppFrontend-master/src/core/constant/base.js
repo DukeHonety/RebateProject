@@ -1,6 +1,8 @@
 export const baseServerUrl = 'http://localhost:5000';
 
-export const getDateStr = (date_ob) => {
+export const getDateStr = (dateInfo) => {
+    console.log(new Date(dateInfo));
+    const date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
 
     // current month

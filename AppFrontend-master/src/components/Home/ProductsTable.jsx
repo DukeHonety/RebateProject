@@ -265,7 +265,7 @@ export default function ProductsTable() {
                         <Typography
                           className={classes.tableCellContent}
                         >
-                          {getDateStr(new Date(submission.date))}
+                          {submission.date}
                         </Typography>
                       </Box>
                     </TableCell>

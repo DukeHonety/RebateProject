@@ -51,7 +51,7 @@ app.post("/storeform", async(req, res) => {
     // const submissionCol = collection(db, "submissions");
     try {
       // const docRef = await addDoc(submissionCol, userInput);
-      userInput.date = new Date();
+      userInput.date = getDateStr();
     //   console.log(userInput);
       await setDoc(doc(db, "submissions", userInput.order_id), userInput);
     }
@@ -93,3 +93,26 @@ const server = app.listen(port, async () => {
         console.log(e);
     }
 });
+
+const getDateStr = () => {
+    const date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    // current year
+    let year = date_ob.getFullYear();
+
+    // current hours
+    let hours = date_ob.getHours();
+
+    // current minutes
+    let minutes = date_ob.getMinutes();
+
+    // current seconds
+    let seconds = date_ob.getSeconds();
+
+    // prints date & time in YYYY-MM-DD HH:MM:SS format
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+}
