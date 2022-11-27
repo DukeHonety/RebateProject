@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Provider, useDispatch } from 'react-redux';
 import axios from 'axios';
-import Routers from "./router"
+import Routers from "./router";
 import { store } from './app/store';
 import { baseServerUrl } from "./core/constant/base";
 import { setSubmissions } from "./app/appSlice";
@@ -14,8 +14,8 @@ const App = () => {
       let response;
       try {
         response = await axios.get(`${baseServerUrl}/submissions`);
-        console.log(response);
         if (response.data) {
+          console.log(response.data);
           dispatch(setSubmissions(response.data));
         }
       } catch (error) {
@@ -27,9 +27,7 @@ const App = () => {
   }, [])
   return (
     <>
-      <Provider store={store}>
-        <Routers />
-      </Provider>
+      <Routers />
     </>
   );
 };

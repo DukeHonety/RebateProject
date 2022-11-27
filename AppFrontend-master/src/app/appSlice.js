@@ -9,7 +9,7 @@ export const appSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setSubmissions: (state, { payload }) => {
-      state.user_name = payload;
+      state.submissions = payload;
     },
   }
 });

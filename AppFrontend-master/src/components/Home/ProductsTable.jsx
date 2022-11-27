@@ -14,13 +14,14 @@ import {
 import InfoIcon from "@mui/icons-material/Info";
 import Rating from "@mui/material/Rating";
 import Tooltip from "@mui/material/Tooltip";
-import productImage from "../../assets/images/productImage.png";
-import lock from "../../assets/images/lock.png";
 import TablePagination from "@mui/material/TablePagination";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import Divider from "@mui/material/Divider";
 import { makeStyles } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import productImage from "../../assets/images/productImage.png";
+import lock from "../../assets/images/lock.png";
 
 //styling
 const useStyles = makeStyles((theme) => ({
@@ -85,7 +86,9 @@ export default function ProductsTable() {
   const handleClose = () => setOpen(false);
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [comment, setComment] = React.useState('');
 
+  const submissions = useSelector((state) => state.app.submissions);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -194,410 +197,112 @@ export default function ProductsTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  {" "}
-                  <Typography
-                    className={classes.tableCellContent}
-                  >
-                    118-986254-235656
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  {" "}
-                  <Box
-                    className={classes.productContent}
-                  >
-                    <Box
-                      component="img"
-                      className={classes.productImage}
-                      alt="Your logo."
-                      src={productImage}
-                    />
-                    <Box>
-                      <Typography>
-                        Moon Lamp RGB Glow Remote Controlled...
+            {
+              submissions.map((submission, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {" "}
+                      <Typography
+                        className={classes.tableCellContent}
+                      >
+                        {submission.order_id}
                       </Typography>
-                      <Typography sx={{ color: "#646464" }}>
-                        SKU: GlobeUSA2
-                      </Typography>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box
-                    className={classes.ratingBox}
-                  >
-                    <Rating
-                      name="simple-controlled"
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      size="large"
-                    />
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "black",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "25px",
-                        paddingRight: "25px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      View Comment
-                    </Button>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Typography
-                      className={classes.tableCellContent}
-                    >
-                      Sep 10, 2022
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Box sx={{ textAlign: "center" }}>
-                      <Tooltip title="Enable in Billing" placement="top-start">
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Box
+                        className={classes.productContent}
+                      >
                         <Box
                           component="img"
-
+                          className={classes.productImage}
                           alt="Your logo."
-                          src={lock}
+                          src={productImage}
                         />
-                      </Tooltip>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#FDA700",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "35px",
-                        paddingRight: "35px",
-                      }}
-                    >
-                      Pending
-                    </Button>
-                  </Box>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  {" "}
-                  <Typography
-                    className={classes.tableCellContent}
-                  >
-                    118-986254-235656
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  {" "}
-                  <Box
-                    className={classes.productContent}
-                  >
-                    <Box
-                      component="img"
-                      className={classes.productImage}
-                      alt="Your logo."
-                      src={productImage}
-                    />
-                    <Box>
-                      <Typography>
-                        Moon Lamp RGB Glow Remote Controlled...
-                      </Typography>
-                      <Typography sx={{ color: "#646464" }}>
-                        SKU: GlobeUSA2
-                      </Typography>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box
-                    className={classes.ratingBox}
-                  >
-                    <Rating
-                      name="simple-controlled"
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      size="large"
-                    />
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "black",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "25px",
-                        paddingRight: "25px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      View Comment
-                    </Button>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Typography
-                      className={classes.tableCellContent}
-                    >
-                      Sep 10, 2022
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Box sx={{ textAlign: "center" }}>
-                      <Tooltip title="Enable in Billing" placement="top-start">
-                        <Box
-                          component="img"
-
-                          alt="Your logo."
-                          src={lock}
+                        <Box>
+                          <Typography>
+                            Moon Lamp RGB Glow Remote Controlled...
+                          </Typography>
+                          <Typography sx={{ color: "#646464" }}>
+                            SKU: GlobeUSA2
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        className={classes.ratingBox}
+                      >
+                        <Rating
+                          name="simple-controlled"
+                          value={submission.enjoy}
+                          size="large"
                         />
-                      </Tooltip>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#FDA700",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "35px",
-                        paddingRight: "35px",
-                      }}
-                    >
-                      Pending
-                    </Button>
-                  </Box>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  {" "}
-                  <Typography
-                    className={classes.tableCellContent}
-                  >
-                    118-986254-235656
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  {" "}
-                  <Box
-                    className={classes.productContent}
-                  >
-                    <Box
-                      component="img"
-                      className={classes.productImage}
-                      alt="Your logo."
-                      src={productImage}
-                    />
-                    <Box>
-                      <Typography>
-                        Moon Lamp RGB Glow Remote Controlled...
-                      </Typography>
-                      <Typography sx={{ color: "#646464" }}>
-                        SKU: GlobeUSA2
-                      </Typography>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box
-                    className={classes.ratingBox}
-                  >
-                    <Rating
-                      name="simple-controlled"
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      size="large"
-                    />
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "black",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "25px",
-                        paddingRight: "25px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      View Comment
-                    </Button>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Typography
-                      className={classes.tableCellContent}
-                    >
-                      Sep 10, 2022
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Box sx={{ textAlign: "center" }}>
-                      <Tooltip title="Enable in Billing" placement="top-start">
-                        <Box
-                          component="img"
-
-                          alt="Your logo."
-                          src={lock}
-                        />
-                      </Tooltip>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#FDA700",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "35px",
-                        paddingRight: "35px",
-                      }}
-                    >
-                      Pending
-                    </Button>
-                  </Box>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  {" "}
-                  <Typography
-                    className={classes.tableCellContent}
-                  >
-                    118-986254-235656
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  {" "}
-                  <Box
-                    className={classes.productContent}
-                  >
-                    <Box
-                      component="img"
-                      className={classes.productImage}
-                      alt="Your logo."
-                      src={productImage}
-                    />
-                    <Box>
-                      <Typography>
-                        Moon Lamp RGB Glow Remote Controlled...
-                      </Typography>
-                      <Typography sx={{ color: "#646464" }}>
-                        SKU: GlobeUSA2
-                      </Typography>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box
-                    className={classes.ratingBox}
-                  >
-                    <Rating
-                      name="simple-controlled"
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      size="large"
-                    />
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "black",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "25px",
-                        paddingRight: "25px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      View Comment
-                    </Button>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Typography
-                      className={classes.tableCellContent}
-                    >
-                      Sep 10, 2022
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Box sx={{ textAlign: "center" }}>
-                      <Tooltip title="Enable in Billing" placement="top-start">
-                        <Box
-                          component="img"
-
-                          alt="Your logo."
-                          src={lock}
-                        />
-                      </Tooltip>
-                    </Box>
-                  </Box>
-                </TableCell>
-                <TableCell>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#7335FD",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                        textTransform: "capitalize",
-                        paddingLeft: "35px",
-                        paddingRight: "35px",
-                      }}
-                    >
-                      Verified
-                    </Button>
-                  </Box>
-                </TableCell>
-              </TableRow>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            color: "white",
+                            backgroundColor: "black",
+                            borderRadius: "10px",
+                            marginTop: "10px",
+                            textTransform: "capitalize",
+                            paddingLeft: "25px",
+                            paddingRight: "25px",
+                          }}
+                          onClick={() => {
+                            setComment(submission.comment)
+                            handleOpen();
+                          }}
+                        >
+                          View Comment
+                        </Button>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ textAlign: "center" }}>
+                        <Typography
+                          className={classes.tableCellContent}
+                        >
+                          Sep 10, 2022
+                        </Typography>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ textAlign: "center" }}>
+                        <Box sx={{ textAlign: "center" }}>
+                          <Tooltip title="Enable in Billing" placement="top-start">
+                            <Box
+                              component="img"
+                              alt="Your logo."
+                              src={lock}
+                            />
+                          </Tooltip>
+                        </Box>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box sx={{ textAlign: "center" }}>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            color: "white",
+                            backgroundColor: "#FDA700",
+                            borderRadius: "10px",
+                            marginTop: "10px",
+                            textTransform: "capitalize",
+                            paddingLeft: "35px",
+                            paddingRight: "35px",
+                          }}
+                        >
+                          Pending
+                        </Button>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                )
+              })
+            }
             </TableBody>
           </Table>
           <Box sx={{ width: "97%", margin: "auto", paddingTop: "20px" }}>
@@ -653,7 +358,7 @@ export default function ProductsTable() {
               fontSize: "20px",
             }}
           >
-            Great product, wish it was smaller
+            {comment}
           </Typography>
         </Box>
       </Modal>

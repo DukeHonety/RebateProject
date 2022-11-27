@@ -67,7 +67,7 @@ app.get("/submissions", async(req, res) => {
       // doc.data() is never undefined for query doc snapshots
       result.push(doc.data());
     });
-    res.json({data:result});
+    res.json(result);
     // return result;
   }
   catch (e) {
