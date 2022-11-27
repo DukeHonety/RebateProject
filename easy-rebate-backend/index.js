@@ -51,6 +51,8 @@ app.post("/storeform", async(req, res) => {
     // const submissionCol = collection(db, "submissions");
     try {
       // const docRef = await addDoc(submissionCol, userInput);
+      userInput.date = new Date();
+    //   console.log(userInput);
       await setDoc(doc(db, "submissions", userInput.order_id), userInput);
     }
     catch(e) {
