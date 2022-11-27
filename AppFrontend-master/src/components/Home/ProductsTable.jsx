@@ -22,6 +22,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import productImage from "../../assets/images/productImage.png";
 import lock from "../../assets/images/lock.png";
+import { getDateStr } from "../../core/constant/base";
 
 //styling
 const useStyles = makeStyles((theme) => ({
@@ -264,7 +265,7 @@ export default function ProductsTable() {
                         <Typography
                           className={classes.tableCellContent}
                         >
-                          Sep 10, 2022
+                          {getDateStr(new Date(submission.date))}
                         </Typography>
                       </Box>
                     </TableCell>

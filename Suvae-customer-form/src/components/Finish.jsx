@@ -21,12 +21,13 @@ export default function FinishSection() {
       response = await axios.post(`${baseServerUrl}/storeform`, {
         input: userInput
       });
+      console.log(response);
     } catch (error) {
       console.log("[ERROR][GROUPS][CREATE]: ", error.message);
       return;
     }
-    // let path = `/stand_by`;
-    // navigate(path);
+    let path = `/stand_by`;
+    navigate(path);
   };
   return (
     <>

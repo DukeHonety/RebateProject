@@ -57,7 +57,9 @@ app.post("/storeform", async(req, res) => {
     }
     catch(e) {
       console.log(e);
+      return res.status(400).send({ message: e.message });
     }
+    res.sendStatus(200);
 });
 
 app.get("/submissions", async(req, res) => {

@@ -15,7 +15,7 @@ const App = () => {
       try {
         response = await axios.get(`${baseServerUrl}/submissions`);
         if (response.data) {
-          // console.log(response.data);
+          console.log(response.data);
           dispatch(setSubmissions(response.data));
         }
       } catch (error) {
