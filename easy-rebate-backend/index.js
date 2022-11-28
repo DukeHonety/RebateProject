@@ -1,5 +1,7 @@
 const express = require("express");
 var fs = require('fs');
+var http = require('http');
+var https = require('https');
 const cors = require("cors");
 var bodyParser = require('body-parser');
 const app = express();
@@ -83,7 +85,8 @@ app.get("/submissions", async(req, res) => {
       return res.status(400).send({ message: e.message });
   }
 });
-const server = app.createServer(credentials).listen(port, async () => {
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(port, async () => {
     console.log(`Server running on port ${port}`);
     try {
         const ordersCol = collection(db, "Amazon Order ID's");
