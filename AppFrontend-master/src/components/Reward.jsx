@@ -126,7 +126,7 @@ export default function RewardSection() {
                       }}
                       onClick={onTextButtonClick}
                     >
-                      TEXT
+                      Next to TEXT
                     </Button>
 
                     <Button

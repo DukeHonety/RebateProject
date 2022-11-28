@@ -95,8 +95,8 @@ export default function RewardSection() {
                   <Button
                       variant="contained"
                       sx={{
-                        background:
-                          "linear-gradient(90deg, #FB8F66 0%, #7033FF 100%)",
+                        // background:
+                        //   "linear-gradient(90deg, #FB8F66 0%, #7033FF 100%)",
                         width: "100%",
                         marginTop: "20px",
                         paddingTop: "15px",
@@ -105,8 +105,9 @@ export default function RewardSection() {
                         fontWeight: "600",
                       }}
                       onClick={onTextButtonClick}
+                      disabled
                     >
-                      TEXT
+                      TEXT (UNAVAILABLE)
                     </Button>
 
                     <Button
