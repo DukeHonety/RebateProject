@@ -1,7 +1,12 @@
 const express = require("express");
+var fs = require('fs');
 const cors = require("cors");
 var bodyParser = require('body-parser');
 const app = express();
+
+var privateKey = fs.readFileSync('sslcert/server.key');
+var certificate = fs.readFileSync('sslcert/server.crt');
+var credentials = {key: privateKey, cert: certificate};
 
 const { initializeApp } = require('firebase/app');
 const { doc, getDoc, addDoc, setDoc } = require("firebase/firestore");
@@ -78,7 +83,7 @@ app.get("/submissions", async(req, res) => {
       return res.status(400).send({ message: e.message });
   }
 });
-const server = app.listen(port, async () => {
+const server = app.createServer(credentials).listen(port, async () => {
     console.log(`Server running on port ${port}`);
     try {
         const ordersCol = collection(db, "Amazon Order ID's");

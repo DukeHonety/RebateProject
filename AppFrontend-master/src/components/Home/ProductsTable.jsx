@@ -272,13 +272,8 @@ export default function ProductsTable() {
                     <TableCell>
                       <Box sx={{ textAlign: "center" }}>
                         <Box sx={{ textAlign: "center" }}>
-                          <Tooltip title="Enable in Billing" placement="top-start">
-                            <Box
-                              component="img"
-                              alt="Your logo."
-                              src={lock}
-                            />
-                          </Tooltip>
+                          <p>{submission.user_name}</p>
+                          <p>{submission.link_email}</p>
                         </Box>
                       </Box>
                     </TableCell>
