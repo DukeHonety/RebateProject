@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Provider, useSelector, useDispatch } from 'react-redux';
+import axios from "axios";
+
 import Home from "./pages/Home";
 import Rating from "./pages/Rating";
 import Comments from "./pages/Comments";
@@ -16,12 +18,27 @@ import AlreadyUsedOrderNumber from "./pages/AlreadyUsedOrderNumber";
 import SystemUpdate from "./pages/SystemUpdate";
 import UpdatingVersion from "./pages/Updating";
 import { setStatus } from "./app/appSlice";
+import { baseServerUrl } from "./core/constant/base";
 
 const App = () => {
   const status = useSelector(state => state.app.status);
   const dispatch = useDispatch();
+
+  const getSuvaeStatus = async () => {
+    let response;
+    try{
+      response = await axios.get(`${baseServerUrl}/suvae`);
+      if (response.data) {
+        let status = response.data.status === true ? 'normal' : 'updating';
+        dispatch(setStatus(status));
+      }
+    }
+    catch(e){
+      console.log(e.message);
+    }
+  };
   useEffect(() => {
-    dispatch(setStatus('normal'));
+    getSuvaeStatus();
   }, []);
   return (
     <>

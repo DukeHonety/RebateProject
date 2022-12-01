@@ -4,10 +4,13 @@ var http = require('http');
 var https = require('https');
 const cors = require("cors");
 var bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const app = express();
 
-var privateKey = fs.readFileSync('sslcert/server.key');
-var certificate = fs.readFileSync('sslcert/server.crt');
+dotenv.config();
+
+var privateKey = fs.readFileSync('sslcert/levinagift.key');
+var certificate = fs.readFileSync('sslcert/levinagift.crt');
 var credentials = {key: privateKey, cert: certificate};
 
 const { initializeApp } = require('firebase/app');
@@ -22,14 +25,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDub_7am1OiXSAPctcJpfUmcZEDlSjV-hc",
-    authDomain: "newt-nutrition.firebaseapp.com",
-    databaseURL: "https://newt-nutrition-default-rtdb.firebaseio.com",
-    projectId: "newt-nutrition",
-    storageBucket: "newt-nutrition.appspot.com",
-    messagingSenderId: "1084163711012",
-    appId: "1:1084163711012:web:62601e0b1e144aac7ff8b1",
-    measurementId: "G-1L3G61SHBH"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_RUL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASURMENT_ID
 };
 
 const firebaseConn = initializeApp(firebaseConfig);
@@ -85,11 +88,29 @@ app.get("/submissions", async(req, res) => {
       return res.status(400).send({ message: e.message });
   }
 });
+
+app.get("/suvae", async(req, res) => {
+  console.log("[loading suave status]");
+  try {
+    const docRef = doc(db, "levinagift-setting", "suvae");
+    const docData = await getDoc(docRef);
+    const result =docData.data();
+    res.json(result);
+    // res.sendStatus(200);
+  }
+  catch (e) {
+      return res.status(400).send({ message: e.message });
+  }
+});
+
+app.post("/suave", async(req, res) => {
+
+});
 var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, async () => {
     console.log(`Server running on port ${port}`);
     try {
-        const ordersCol = collection(db, "Amazon Order ID's");
+        // const ordersCol = collection(db, "Amazon Order ID's");
         // const orderDocs = await getDocs(ordersCol);
         // orderDocs.forEach((doc) => {
         //     console.log(doc.id, " => ", doc.data());
