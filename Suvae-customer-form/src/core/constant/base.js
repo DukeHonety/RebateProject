@@ -1,1 +1,1 @@
-export const baseServerUrl = 'https://levinagift.com/api';
+export const baseServerUrl = 'https://139.144.170.137/api';
