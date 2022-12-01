@@ -123,21 +123,21 @@ app.post("/suvae", async(req, res) => {
     return res.status(400).send({ message: e.message });
   }
 });
-var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(port, async () => {
-    console.log(`Server running on port ${port}`);
-    try {
-        // const ordersCol = collection(db, "Amazon Order ID's");
-        // const orderDocs = await getDocs(ordersCol);
-        // orderDocs.forEach((doc) => {
-        //     console.log(doc.id, " => ", doc.data());
-        // });
+// var httpsServer = https.createServer(credentials, app);
+app.listen(port, async () => {
+  console.log(`Server running on port ${port}`);
+  try {
+      // const ordersCol = collection(db, "Amazon Order ID's");
+      // const orderDocs = await getDocs(ordersCol);
+      // orderDocs.forEach((doc) => {
+      //     console.log(doc.id, " => ", doc.data());
+      // });
 
-        
-    }
-    catch (e) {
-        console.log(e);
-    }
+      
+  }
+  catch (e) {
+      console.log(e);
+  }
 });
 
 const getDateStr = () => {
