@@ -6,7 +6,8 @@ const initialState = {
   enjoy: 0,
   comment: '',
   phone: '',
-  link_email: ''
+  link_email: '',
+  status: 'updating'
 }
 export const appSlice = createSlice({
   name: 'app',
@@ -31,6 +32,9 @@ export const appSlice = createSlice({
     setLinkEmail: (state, { payload }) => {
       state.link_email = payload;
     },
+    setStatus: (state, { payload }) => {
+      state.status = payload;
+    },
   }
 });
 
@@ -40,7 +44,8 @@ export const {
     setEnjoyLvl,
     setComment,
     setPhone,
-    setLinkEmail
+    setLinkEmail,
+    setStatus
 } = appSlice.actions;
 
 export default appSlice.reducer;
