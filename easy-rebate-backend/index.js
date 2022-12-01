@@ -56,7 +56,7 @@ app.post("/checkorder", async(req, res) => {
 });
 
 app.get("/submissions", async(req, res) => {
-  // console.log("[loading submissions]");
+  console.log("[loading submissions]");
   try {
     const docRef = await getDocs(collection(db, "submissions"));
     let result = [];
