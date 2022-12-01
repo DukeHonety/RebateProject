@@ -125,7 +125,7 @@ app.post("/suvae", async(req, res) => {
 });
 var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, async () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${await app.getUrl()} ${port}`);
     try {
         // const ordersCol = collection(db, "Amazon Order ID's");
         // const orderDocs = await getDocs(ordersCol);
