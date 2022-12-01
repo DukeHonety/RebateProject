@@ -4,7 +4,7 @@ import axios from 'axios';
 import Routers from "./router";
 import { store } from './app/store';
 import { baseServerUrl } from "./core/constant/base";
-import { setSubmissions } from "./app/appSlice";
+import { setSubmissions, setSuvaeProfile } from "./app/appSlice";
 
 const App = () => {
 
@@ -15,8 +15,14 @@ const App = () => {
       try {
         response = await axios.get(`${baseServerUrl}/submissions`);
         if (response.data) {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch(setSubmissions(response.data));
+        }
+        
+        response = await axios.get(`${baseServerUrl}/suvae`);
+        if (response.data) {
+          // console.log(response.data);
+          dispatch(setSuvaeProfile(response.data));
         }
       } catch (error) {
         console.log("[ERROR][GROUPS][CREATE]: ", error.message);

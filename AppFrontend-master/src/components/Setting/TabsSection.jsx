@@ -9,6 +9,7 @@ import AccountSection from "./AccountSection";
 import BillingSection from "./BillingSection";
 import BillingHistory from "./BillingHistory";
 import { AmazonSetting } from "./AmazonSetting";
+import { SuvaeFormSetting } from "./SuvaeForm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -111,6 +112,12 @@ export default function TabsSection() {
           {...a11yProps("three")}
           className={classes.style}
         />
+        <Tab
+          value="suvae-form"
+          label="Suvae Form"
+          {...a11yProps("three")}
+          className={classes.style}
+        />
       </Tabs>
 
       <TabPanel value={value} index="one">
@@ -124,6 +131,9 @@ export default function TabsSection() {
       </TabPanel>
       <TabPanel value={value} index="four">
         <BillingHistory />
+      </TabPanel>
+      <TabPanel value={value} index="suvae-form">
+        <SuvaeFormSetting />
       </TabPanel>
     </div>
   );

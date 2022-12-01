@@ -57,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 export default function BillingHistory() {
   const classes = useStyles();
   const [page, setPage] = React.useState(2);
@@ -72,7 +71,6 @@ export default function BillingHistory() {
 
   return (
     <>
-
       <Box>
         <TableContainer
           component={Paper}

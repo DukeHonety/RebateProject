@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   submissions: [],
+  suvaeProfile: {}
 }
 export const appSlice = createSlice({
   name: 'app',
@@ -11,11 +12,15 @@ export const appSlice = createSlice({
     setSubmissions: (state, { payload }) => {
       state.submissions = payload;
     },
+    setSuvaeProfile: (state, { payload }) => {
+      state.suvaeProfile = payload;
+    },
   }
 });
 
 export const {
-  setSubmissions
+  setSubmissions,
+  setSuvaeProfile
 } = appSlice.actions;
 
 export default appSlice.reducer;

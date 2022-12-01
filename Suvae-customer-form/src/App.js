@@ -30,6 +30,7 @@ const App = () => {
       response = await axios.get(`${baseServerUrl}/suvae`);
       if (response.data) {
         let status = response.data.status === true ? 'normal' : 'updating';
+        console.log(response.data);
         dispatch(setStatus(status));
       }
     }

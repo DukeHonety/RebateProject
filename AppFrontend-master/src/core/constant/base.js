@@ -1,4 +1,4 @@
-export const baseServerUrl = 'https://139.144.170.137:5000';
+export const baseServerUrl = 'https://localhost:5000';
 
 export const getDateStr = (dateInfo) => {
     console.log(new Date(dateInfo));

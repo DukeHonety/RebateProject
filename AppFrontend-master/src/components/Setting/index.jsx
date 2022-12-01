@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 import TabsSection from "./TabsSection";
 
-export default function Create() {
+export default function SettingPage() {
   return (
     <Box>
       <Typography

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import { Box } from "@mui/material";
 import Asidebar from "../components/Asidebar";
-import SettingMain from "../components/Setting/SettingMain";
+import SettingMain from "../components/Setting/";
 
 export default function Setting() {
   return (

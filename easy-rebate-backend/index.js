@@ -55,9 +55,42 @@ app.post("/checkorder", async(req, res) => {
     }
 });
 
+app.get("/submissions", async(req, res) => {
+  // console.log("[loading submissions]");
+  try {
+    const docRef = await getDocs(collection(db, "submissions"));
+    let result = [];
+    docRef.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      result.push(doc.data());
+    });
+    res.json(result);
+    // return result;
+  }
+  catch (e) {
+    return res.status(400).send({ message: e.message });
+  }
+});
+
+app.get("/suvae", async(req, res) => {
+  // console.log("[loading suvae status]");
+  try {
+    const docRef = doc(db, "levinagift-setting", "suvae");
+    const docData = await getDoc(docRef);
+    const result = docData.data();
+    res.json(result);
+    // res.sendStatus(200);
+  }
+  catch (e) {
+    return res.status(400).send({ message: e.message });
+  }
+});
+
 app.post("/storeform", async(req, res) => {
     console.log('[received a submission] : ');
     const userInput = req.body.input;
+    if (userInput.order_id == undefined)
+      return res.status(400).send({ message: 'Wrong submission call' });
     // const submissionCol = collection(db, "submissions");
     try {
       // const docRef = await addDoc(submissionCol, userInput);
@@ -72,39 +105,23 @@ app.post("/storeform", async(req, res) => {
     res.sendStatus(200);
 });
 
-app.get("/submissions", async(req, res) => {
-  console.log("[loading submissions]");
-  try {
-    const docRef = await getDocs(collection(db, "submissions"));
-    let result = [];
-    docRef.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      result.push(doc.data());
-    });
-    res.json(result);
-    // return result;
-  }
-  catch (e) {
-      return res.status(400).send({ message: e.message });
-  }
-});
-
-app.get("/suvae", async(req, res) => {
-  console.log("[loading suave status]");
+app.post("/suvae", async(req, res) => {
+  console.log("[setting suvae status]");
   try {
     const docRef = doc(db, "levinagift-setting", "suvae");
     const docData = await getDoc(docRef);
-    const result =docData.data();
-    res.json(result);
-    // res.sendStatus(200);
+    const result = docData.data();
+    const input = req.body;
+    Object.keys(input).forEach((key) => {
+      if (!isNaN(result[key]))
+        result[key] = input[key];
+    });
+    await setDoc(docRef, result);
+    res.sendStatus(200);
   }
   catch (e) {
-      return res.status(400).send({ message: e.message });
+    return res.status(400).send({ message: e.message });
   }
-});
-
-app.post("/suave", async(req, res) => {
-
 });
 var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, async () => {
