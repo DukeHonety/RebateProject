@@ -138,7 +138,7 @@ export default function Asidebar() {
           </Box>
           <Box sx={{ marginTop: "10px" }}>
             <Link
-              href="/dashboard"
+              href="/"
               sx={{ color: "white", textDecoration: "none" }}
             >
               <Box
@@ -151,7 +151,7 @@ export default function Asidebar() {
                   borderRadius: "10px",
                 }}
                 backgroundColor={
-                  location.pathname === "/dashboard" ? "#5541D8" : ""
+                  location.pathname === "/" ? "#5541D8" : ""
                 }
               >
                 <Box
@@ -173,7 +173,7 @@ export default function Asidebar() {
                     marginLeft: "20px",
                   }}
                   color={
-                    location.pathname === "/dashboard" ? "white" : "#8B8FA3"
+                    location.pathname === "/" ? "white" : "#8B8FA3"
                   }
                 >
                   Package Insert Gallery
@@ -305,9 +305,9 @@ export default function Asidebar() {
               paddingBottom: "10px",
             }}
             borderLeft={
-              location.pathname === "/dashboard" ? "3px solid #7335FD" : ""
+              location.pathname === "/" ? "3px solid #7335FD" : ""
             }
-            backgroundColor={location.pathname === "/dashboard" ? "black" : ""}
+            backgroundColor={location.pathname === "/" ? "black" : ""}
           >
             <Box
               component="img"
