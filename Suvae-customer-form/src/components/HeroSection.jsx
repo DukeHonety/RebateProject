@@ -21,8 +21,9 @@ export default function HeroSection() {
   const [orderError, setOrderError] = useState(false);
 
   const handleChange = (event) => {
-    const result = event.target.value.replace(/[^a-z]/gi, "");
-    setMessage(result);
+    // const result = event.target.value.replace(/[^a-z]/gi, "");
+    setMessage(event.target.value);
+    
   };
   const onClaimButtonClick = async() => {
     let response;
