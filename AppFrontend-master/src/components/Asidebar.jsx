@@ -138,7 +138,7 @@ export default function Asidebar() {
           </Box>
           <Box sx={{ marginTop: "10px" }}>
             <Link
-              href="/dashboard"
+              href="/"
               sx={{ color: "white", textDecoration: "none" }}
             >
               <Box
@@ -151,7 +151,7 @@ export default function Asidebar() {
                   borderRadius: "10px",
                 }}
                 backgroundColor={
-                  location.pathname === "/dashboard" ? "#5541D8" : ""
+                  location.pathname === "/" ? "#5541D8" : ""
                 }
               >
                 <Box
