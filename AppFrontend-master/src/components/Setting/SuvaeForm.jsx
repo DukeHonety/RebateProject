@@ -151,6 +151,7 @@ export const SuvaeFormSetting = () => {
   const saveProfile = async () => {
     try {
       const response = await axios.post(`${baseServerUrl}/suvae`, suvaeProfile);
+      alert('saved');
     }
     catch(e){
       console.log(e.message);

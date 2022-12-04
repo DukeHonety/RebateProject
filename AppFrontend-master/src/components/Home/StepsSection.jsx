@@ -175,7 +175,7 @@ export default function StepsSection() {
                       >
                         Upload Promotional Codes
                       </Typography>
-                      <Typography
+                      <Box
                         sx={{
                           fontSize: "18px",
                           fontWeight: "600",
@@ -183,13 +183,13 @@ export default function StepsSection() {
                           marginTop: "5px",
                         }}
                       >
-                        <Box
+                        <p
                           onClick={onClickFinishSetup}
                           sx={{ cursor: "pointer" }}
                         >
                           Set Up
-                        </Box>
-                      </Typography>
+                        </p>
+                      </Box>
                     </Box>
                   </Grid>
                 </Grid>
