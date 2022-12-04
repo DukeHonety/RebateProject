@@ -5,6 +5,7 @@ var https = require('https');
 const cors = require("cors");
 var bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+var nodemailer = require('nodemailer');
 const app = express();
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -122,6 +124,34 @@ app.post("/suvae", async(req, res) => {
   catch (e) {
     return res.status(400).send({ message: e.message });
   }
+});
+
+app.get("/sendmail", async(req,res) => {
+  console.log("receving mail");
+  var transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD
+    }
+  });
+  var mailOptions = {
+    from: 'mitchellcaleb00@gmail.com',
+    to: 'hello.dennis0102@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      return res.sendStatus(200);
+    }
+    return res.status(400).send({ message: "Send email is failed" });
+  });
 });
 // var httpsServer = https.createServer(credentials, app);
 app.listen(port, async () => {

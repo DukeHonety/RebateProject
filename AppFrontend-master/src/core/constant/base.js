@@ -1,4 +1,4 @@
-export const baseServerUrl = 'https://www.levinagift.com/api';
+export const baseServerUrl = 'https://levinagift.com/api';
 
 export const getDateStr = (dateInfo) => {
     console.log(new Date(dateInfo));
